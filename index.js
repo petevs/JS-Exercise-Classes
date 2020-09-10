@@ -84,7 +84,7 @@ class Car {
     this.tank += gallons;
   }
   drive(distance) {
-    if (this.tank * this.milePerGallon - distance > 0) {
+    if (this.tank * this.milesPerGallon - distance > 0) {
       this.odometer += distance;
       this.tank -= distance / this.milesPerGallon;
     } else {
@@ -167,7 +167,7 @@ class Student extends Lambdasian {
     super(attrs);
     this.previousBackground = attrs.previousBackground;
     this.className = attrs.className;
-    this.favSubjects = [attrs.favSubjects];
+    this.favSubjects = attrs.favSubjects;
   }
   listSubjects() {
     return `Loving ${this.favSubjects.toString()}!`;

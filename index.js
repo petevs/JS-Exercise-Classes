@@ -145,6 +145,28 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  adjustGrade(student, maxScore) {
+    //Randomly generates a number between 1 and maxScore
+    let points = Math.round(Math.random() * maxScore);
+    //Randomly multiplies it by either 1 or -1
+    //Math.random gives you 0 or 1, multiplying by 2 gives 0 or 2, subtracting 1 gives either 1 or -1
+    let negOrPos = Math.round(Math.random()) * 2 - 1;
+    let score = points * negOrPos;
+    if (student.grade + score < 0) {
+      student.grade = 0;
+    } else if (student.grade + score >= 100) {
+      student.grade = 100;
+    } else {
+      student.grade += score;
+    }
+  }
+  graduate(student) {
+    if (student.grade < 70) {
+      this.adjustGrade(student, 100);
+    } else {
+      return `${student}'s grade is ${student.grade} and is ready to graduate!`;
+    }
+  }
 }
 
 /*
@@ -168,6 +190,7 @@ class Student extends Lambdasian {
     this.previousBackground = attrs.previousBackground;
     this.className = attrs.className;
     this.favSubjects = attrs.favSubjects;
+    this.grade = 0;
   }
   listSubjects() {
     return `Loving ${this.favSubjects.toString()}!`;
